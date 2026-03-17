@@ -44,6 +44,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    
+    // 关键：就是缺了下面这行，导致 XML 里的 ads:adSize 没人认！
+    implementation 'com.google.android.gms:play-services-ads:23.0.0'
+    
     // SQL 格式化核心库
     implementation 'com.github.vertical-blank:sql-formatter:2.0.3'
 }
