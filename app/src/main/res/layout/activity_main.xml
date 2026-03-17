@@ -9,8 +9,6 @@
         android:id="@+id/et_input_sql"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        # ❌ 原来：android:hint="Paste SQL here..."
-        # ✅ 现在：引用多语言资源
         android:hint="@string/hint_sql"
         android:gravity="top"
         android:background="@android:drawable/editbox_background" />
@@ -21,8 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/et_input_sql"
         android:layout_marginTop="16dp"
-        # ❌ 原来：android:text="Format SQL"
-        # ✅ 现在：引用多语言资源
         android:text="@string/btn_format" />
 
     <ScrollView
