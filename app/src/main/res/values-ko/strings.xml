@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SQL 포맷터 프로</string>
+    <string name="hint_sql">여기에 SQL 붙여넣기</string>
+    <string name="btn_format">포맷하기</string>
+    <string name="msg_empty">SQL을 입력하세요</string>
+    <string name="msg_error">포맷 실패</string>
+    <string name="msg_success">포맷 성공</string>
+</resources>

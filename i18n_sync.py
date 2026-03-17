@@ -1,43 +1,37 @@
 import os
-import xml.etree.ElementTree as ET
 
-# 定义你要支持的语言目录
-LANG_MAP = {
-    'values-zh-rCN': '中文',
-    'values-en': 'English',
-    'values-ja': '日本語',
-    'values-ko': '한국어',
-    'values-de': 'Deutsch'
+# 定义五国语言的准确翻译（直接硬编码，保证不空）
+TRANSLATIONS = {
+    "values": ["SQL Formatter Pro", "Paste SQL here...", "Format", "Enter SQL", "Error", "Success"],
+    "values-zh-rCN": ["SQL 格式化助手", "在此粘贴 SQL...", "一键美化", "请输入 SQL", "格式化失败", "格式化成功"],
+    "values-ja": ["SQL整形プロ", "ここにSQLを貼り付け", "整形する", "SQLを入力してください", "整形に失敗しました",
+                  "整形に成功しました"],
+    "values-ko": ["SQL 포맷터 프로", "여기에 SQL 붙여넣기", "포맷하기", "SQL을 입력하세요", "포맷 실패", "포맷 성공"],
+    "values-de": ["SQL Formatierer", "SQL hier einfügen", "Formatieren", "Bitte SQL eingeben",
+                  "Formatierung fehlgeschlagen", "Erfolgreich formatiert"],
+    "values-en": ["SQL Formatter Pro", "Paste SQL here...", "Format", "Enter SQL", "Error", "Success"]
 }
 
+KEYS = ["app_name", "hint_sql", "btn_format", "msg_empty", "msg_error", "msg_success"]
 BASE_PATH = "app/src/main/res"
 
-def sync_translations():
-    # 1. 以 values/strings.xml 为基准（源头）
-    source_file = os.path.join(BASE_PATH, "values", "strings.xml")
-    if not os.path.exists(source_file):
-        print("错误：找不到源 strings.xml 文件！")
-        return
 
-    print(f"开始同步语言资源，源文件：{source_file}")
-
-    # 2. 遍历所有目标文件夹
-    for folder, lang_name in LANG_MAP.items():
+def generate():
+    for folder, values in TRANSLATIONS.items():
         target_dir = os.path.join(BASE_PATH, folder)
         if not os.path.exists(target_dir):
-            os.makedirs(target_dir) # 自动创建 values-ja 等文件夹
-        
-        target_file = os.path.join(target_dir, "strings.xml")
-        
-        # 这里逻辑是：如果你已经有翻译好的，脚本会帮你对齐格式
-        # 如果你接入了 Google Translate API，这里可以实现自动翻译
-        print(f"正在处理 -> {lang_name} ({folder})")
-        # (此处省略具体调用翻译 API 的逻辑，直接复制源文件作为占位)
-        with open(source_file, 'rb') as f_src:
-            with open(target_file, 'wb') as f_dest:
-                f_dest.write(f_src.read())
+            os.makedirs(target_dir)
 
-    print("✅ 所有语言文件夹已对齐！接下来你可以手动微调翻译内容。")
+        # 严格的 XML 格式
+        content = '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n'
+        for i in range(len(KEYS)):
+            content += f'    <string name="{KEYS[i]}">{values[i]}</string>\n'
+        content += '</resources>'
+
+        with open(os.path.join(target_dir, "strings.xml"), "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"✅ 处理完成: {folder}/strings.xml")
+
 
 if __name__ == "__main__":
-    sync_translations()
+    generate()

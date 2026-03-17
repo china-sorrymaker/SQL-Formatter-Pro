@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SQL整形プロ</string>
+    <string name="hint_sql">ここにSQLを貼り付け</string>
+    <string name="btn_format">整形する</string>
+    <string name="msg_empty">SQLを入力してください</string>
+    <string name="msg_error">整形に失敗しました</string>
+    <string name="msg_success">整形に成功しました</string>
+</resources>

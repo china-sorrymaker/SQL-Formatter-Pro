@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SQL Formatierer</string>
+    <string name="hint_sql">SQL hier einfügen</string>
+    <string name="btn_format">Formatieren</string>
+    <string name="msg_empty">Bitte SQL eingeben</string>
+    <string name="msg_error">Formatierung fehlgeschlagen</string>
+    <string name="msg_success">Erfolgreich formatiert</string>
+</resources>

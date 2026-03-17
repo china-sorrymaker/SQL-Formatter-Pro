@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SQL Formatter Pro</string>
+    <string name="hint_sql">Paste SQL here...</string>
+    <string name="btn_format">Format</string>
+    <string name="msg_empty">Enter SQL</string>
+    <string name="msg_error">Error</string>
+    <string name="msg_success">Success</string>
+</resources>

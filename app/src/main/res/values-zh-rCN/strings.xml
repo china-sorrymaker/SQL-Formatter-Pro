@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SQL 格式化助手</string>
+    <string name="hint_sql">在此粘贴 SQL...</string>
+    <string name="btn_format">一键美化</string>
+    <string name="msg_empty">请输入 SQL</string>
+    <string name="msg_error">格式化失败</string>
+    <string name="msg_success">格式化成功</string>
+</resources>
