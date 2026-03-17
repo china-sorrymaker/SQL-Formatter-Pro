@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - master
 
 jobs:
   build:
@@ -19,7 +20,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 第一步：把你的 Base64 字符串变回真实的 jks 文件，放在根目录
+      # 关键点 1：从 Secrets 还原 JKS 文件到根目录
       - name: Decode Keystore
         run: echo "${{ secrets.SIGNING_KEY }}" | base64 --decode > release-key.jks
 
@@ -28,7 +29,11 @@ jobs:
         with:
           gradle-version: 8.7
 
-      # 第二步：开始打包，并把保险箱里的密码传给 Gradle
+      # 关键点 2：赋予执行权限，解决 No such file or directory 报错
+      - name: Make Gradlew Executable
+        run: chmod +x gradlew
+
+      # 关键点 3：带上 3 个密码变量执行打包
       - name: Build Android App
         env:
           SIGNING_STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
@@ -36,8 +41,9 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: ./gradlew assembleRelease
 
+      # 关键点 4：把打好的包传到 GitHub Actions 页面供下载
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: SQL-Formatter-Pro-APK
+          name: SQL-Formatter-Pro-Package
           path: app/build/outputs/apk/release/*.apk
