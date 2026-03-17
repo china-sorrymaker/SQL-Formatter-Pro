@@ -33,16 +33,19 @@ public class MainActivity extends AppCompatActivity {
         btnFormat.setOnClickListener(v -> {
             String rawSql = etInput.getText().toString();
             if (rawSql.isEmpty()) {
-                Toast.makeText(this, "Please enter SQL", Toast.LENGTH_SHORT).show();
+                // ❌ 错误：Toast.makeText(this, "Please enter SQL", ...).show();
+                // ✅ 正确：引用 strings.xml 里的 ID
+                Toast.makeText(this, getString(R.string.msg_empty), Toast.LENGTH_SHORT).show();
                 return;
             }
             try {
-                // 执行格式化
                 String result = SqlFormatter.format(rawSql);
                 tvOutput.setText(result);
-                Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
+                // ✅ 正确
+                Toast.makeText(this, getString(R.string.msg_success), Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                tvOutput.setText("Format Error");
+                // ✅ 正确
+                tvOutput.setText(getString(R.string.msg_error));
             }
         });
     }
